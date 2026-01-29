@@ -1,0 +1,91 @@
+{
+    "id": "run_live_demo_real_3",
+    "goal_id": "goal_find_cto",
+    "goal_description": "Find CTO candidates for Fintech Startup",
+    "status": "running",
+    "created_at": "2026-01-30T00:15:00.000Z",
+    "updated_at": "2026-01-30T00:15:45.000Z",
+    "input_data": {
+        "role": "CTO",
+        "industry": "Fintech",
+        "experience": "10+ years"
+    },
+    "metrics": {
+        "duration_ms": 45000,
+        "tokens_used": 450,
+        "cost": 0.02,
+        "nodes_executed": [
+            "planner",
+            "linkedin_search"
+        ]
+    },
+    "decisions": [
+        {
+            "id": "dec_01",
+            "node_id": "planner",
+            "intent": "Analyze recruitment strategy",
+            "decision_type": "planning",
+            "timestamp": "2026-01-30T00:15:05.000Z",
+            "options": [
+                {
+                    "id": "job_board",
+                    "description": "Post on LinkedIn Jobs",
+                    "confidence": 0.4
+                },
+                {
+                    "id": "headhunt",
+                    "description": "Direct outreach to candidates",
+                    "confidence": 0.9
+                }
+            ],
+            "chosen_option_id": "headhunt",
+            "reasoning": "High-level CTOs are passive candidates. Direct outreach is 5x more effective.",
+            "outcome": {
+                "success": true,
+                "result": {
+                    "strategy": "search_github_profiles"
+                }
+            }
+        },
+        {
+            "id": "dec_02",
+            "node_id": "github_search",
+            "intent": "Search GitHub for Fintech Engineers",
+            "decision_type": "tool_call",
+            "timestamp": "2026-01-30T00:15:15.000Z",
+            "options": [
+                {
+                    "id": "search_repos",
+                    "description": "Search Popular Repos",
+                    "confidence": 0.8
+                }
+            ],
+            "chosen_option_id": "search_repos",
+            "reasoning": "Looking for contributors to open source fintech libraries.",
+            "outcome": {
+                "success": true,
+                "result": [
+                    "User: dev_guru_99",
+                    "User: fintech_wizard"
+                ]
+            }
+        },
+        {
+            "id": "dec_03",
+            "node_id": "profile_analyzer",
+            "intent": "Analyze 'dev_guru_99'",
+            "decision_type": "analysis",
+            "timestamp": "2026-01-30T00:15:30.000Z",
+            "options": [],
+            "chosen_option_id": "analyze",
+            "reasoning": "Checking for 10+ years experieince.",
+            "outcome": {
+                "success": true,
+                "result": {
+                    "qualified": true,
+                    "notes": "Ex-Stripe engineer"
+                }
+            }
+        }
+    ]
+}

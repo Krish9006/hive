@@ -1,0 +1,130 @@
+{
+    "id": "run_20260129_mock_complex",
+    "goal_id": "goal_research_ai_agents",
+    "goal_description": "Deep dive research on 'Autonomous Agents' trends",
+    "status": "completed",
+    "created_at": "2026-01-30T10:00:00.000Z",
+    "updated_at": "2026-01-30T10:05:00.000Z",
+    "input_data": {
+        "topic": "Autonomous Agents",
+        "sources": [
+            "TechCrunch",
+            "arXiv",
+            "Twitter"
+        ]
+    },
+    "output_data": {
+        "summary": "Autonomous agents are shifting from chat interfaces to headless processes..."
+    },
+    "metrics": {
+        "duration_ms": 450000,
+        "tokens_used": 12500,
+        "cost": 0.25,
+        "nodes_executed": [
+            "planner",
+            "search",
+            "reader",
+            "writer"
+        ]
+    },
+    "decisions": [
+        {
+            "id": "dec_0",
+            "node_id": "planner",
+            "intent": "Determine research strategy",
+            "decision_type": "planning",
+            "timestamp": "2026-01-30T10:00:05.000Z",
+            "options": [
+                {
+                    "id": "deep_scan",
+                    "description": "Read 50+ academic papers (High Cost)",
+                    "confidence": 0.3
+                },
+                {
+                    "id": "market_scan",
+                    "description": "Scan latest tech news & blogs (Balanced)",
+                    "confidence": 0.95
+                }
+            ],
+            "chosen_option_id": "market_scan",
+            "reasoning": "User asked for 'Trends', which are better found in news than old papers.",
+            "outcome": {
+                "success": true,
+                "result": {
+                    "plan": [
+                        "search_google",
+                        "analyze_results"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "dec_1",
+            "node_id": "search_tool",
+            "intent": "Search for agent news",
+            "decision_type": "tool_call",
+            "timestamp": "2026-01-30T10:00:15.000Z",
+            "options": [
+                {
+                    "id": "search_twitter",
+                    "description": "Search X/Twitter API",
+                    "confidence": 0.6
+                },
+                {
+                    "id": "search_google",
+                    "description": "Search Google News",
+                    "confidence": 0.9
+                }
+            ],
+            "chosen_option_id": "search_google",
+            "reasoning": "Google News provides more reliable structured data for initial discovery.",
+            "outcome": {
+                "success": true,
+                "result": [
+                    "Article: The Rise of Agentic AI",
+                    "Article: LangChain vs Hive"
+                ]
+            }
+        },
+        {
+            "id": "dec_2",
+            "node_id": "scraper",
+            "intent": "Extract content from Article 1",
+            "decision_type": "tool_call",
+            "timestamp": "2026-01-30T10:00:25.000Z",
+            "options": [],
+            "chosen_option_id": "scrape",
+            "reasoning": "Extracting full text for analysis.",
+            "outcome": {
+                "success": false,
+                "error": "TimeoutError: Could not connect to host.",
+                "result": null
+            }
+        },
+        {
+            "id": "dec_3",
+            "node_id": "scraper_retry",
+            "intent": "Retry Extraction (Backoff)",
+            "decision_type": "recovery",
+            "timestamp": "2026-01-30T10:00:30.000Z",
+            "options": [
+                {
+                    "id": "give_up",
+                    "description": "Skip article",
+                    "confidence": 0.1
+                },
+                {
+                    "id": "retry_proxy",
+                    "description": "Retry with Proxy",
+                    "confidence": 0.9
+                }
+            ],
+            "chosen_option_id": "retry_proxy",
+            "reasoning": "Previous error was a timeout, proxy should resolve it. Content is critical.",
+            "outcome": {
+                "success": true,
+                "result": "Full content of the article..."
+            }
+        }
+    ]
+}

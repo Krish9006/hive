@@ -1,0 +1,104 @@
+{
+    "id": "run_20260129_mock12345",
+    "goal_id": "goal_research_ai",
+    "goal_description": "Research current trends in AI Agents",
+    "status": "completed",
+    "created_at": "2026-01-29T10:00:00.000Z",
+    "updated_at": "2026-01-29T10:05:00.000Z",
+    "input_data": {
+        "topic": "AI Agents",
+        "depth": "brief"
+    },
+    "output_data": {
+        "summary": "AI Agents are evolving from chat-based to goal-based autonomous systems."
+    },
+    "metrics": {
+        "duration_ms": 300000,
+        "tokens_used": 1540,
+        "cost": 0.04,
+        "nodes_executed": [
+            "planner",
+            "web_search",
+            "summarizer"
+        ]
+    },
+    "decisions": [
+        {
+            "id": "dec_0",
+            "node_id": "planner",
+            "intent": "Determine research strategy",
+            "decision_type": "planning",
+            "timestamp": "2026-01-29T10:00:05.000Z",
+            "options": [
+                {
+                    "id": "deep_research",
+                    "description": "Read academic papers",
+                    "confidence": 0.4
+                },
+                {
+                    "id": "news_scan",
+                    "description": "Scan tech news sites",
+                    "confidence": 0.9
+                }
+            ],
+            "chosen_option_id": "news_scan",
+            "reasoning": "User requested a 'brief' overview, news scan is more appropriate.",
+            "outcome": {
+                "success": true,
+                "result": {
+                    "plan": [
+                        "search_techcrunch",
+                        "search_hackernews"
+                    ]
+                },
+                "timestamp": "2026-01-29T10:00:10.000Z"
+            }
+        },
+        {
+            "id": "dec_1",
+            "node_id": "web_search",
+            "intent": "Execute search on TechCrunch",
+            "decision_type": "tool_call",
+            "timestamp": "2026-01-29T10:00:15.000Z",
+            "options": [
+                {
+                    "id": "search_tc",
+                    "description": "Search TechCrunch for 'AI Agents'",
+                    "action_type": "tool_call",
+                    "confidence": 1.0
+                }
+            ],
+            "chosen_option_id": "search_tc",
+            "reasoning": "Executing first step of plan.",
+            "outcome": {
+                "success": true,
+                "result": [
+                    "Article 1: Agentic AI is here",
+                    "Article 2: Hive framework launches"
+                ],
+                "timestamp": "2026-01-29T10:00:20.000Z"
+            }
+        },
+        {
+            "id": "dec_2",
+            "node_id": "summarizer",
+            "intent": "Summarize findings",
+            "decision_type": "completion",
+            "timestamp": "2026-01-29T10:04:50.000Z",
+            "options": [
+                {
+                    "id": "summarize",
+                    "description": "Generate summary text",
+                    "confidence": 1.0
+                }
+            ],
+            "chosen_option_id": "summarize",
+            "reasoning": "Sufficient data gathered.",
+            "outcome": {
+                "success": true,
+                "result": "AI Agents are evolving...",
+                "timestamp": "2026-01-29T10:05:00.000Z"
+            }
+        }
+    ]
+}
